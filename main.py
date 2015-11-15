@@ -17,7 +17,7 @@ while True:
     process(bug)
 
     # <LOGIC>
-    bug.motion()
+    bug.motion(SCREENWIDTH)
     # </LOGIC>
 
     # <DRAW>
