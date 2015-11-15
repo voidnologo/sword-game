@@ -57,3 +57,12 @@ class MainCharacter(BaseSprite):
                     self.go_down = False
             else:
                 self.rect.y -= self.vely
+
+
+class Monster(BaseSprite):
+
+    List = pygame.sprite.Group()
+
+    def __init__(self, x, y, width, height, image_string):
+        super(Monster, self).__init__(x, y, width, height, image_string)
+        Monster.List.add(self)
