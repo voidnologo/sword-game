@@ -10,6 +10,7 @@ screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), 0, 32)
 clock = pygame.time.Clock()
 FPS = 24
 
+background = pygame.image.load('images/background.png')
 main_character = MainCharacter(0, SCREENHEIGHT - 128, 128, 128, 'images/sword_right.png')
 
 while True:
@@ -21,7 +22,7 @@ while True:
     # </LOGIC>
 
     # <DRAW>
-    screen.fill((30, 30, 30))
+    screen.blit(background, (0, 0))
     BaseSprite.allsprites.draw(screen)
 
     pygame.display.flip()
