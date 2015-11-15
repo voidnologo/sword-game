@@ -28,7 +28,7 @@ class Bug(BaseClass):
     def __init__(self, x, y, width, height, image_string):
         super(Bug, self).__init__(x, y, width, height, image_string)
         Bug.List.add(self)
-        self.velx = 3
+        self.velx = 0
 
     def motion(self):
         self.rect.x += self.velx

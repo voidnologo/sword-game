@@ -1,26 +1,20 @@
 import pygame
-import sys
 
-from classes import *
+from classes import BaseClass, Bug
+from process import process
 
 
 pygame.init()
-WIDTH, HEIGHT = (640, 360)
-screen = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
+SCREENWIDTH, SCREENHEIGHT = (640, 360)
+screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), 0, 32)
 clock = pygame.time.Clock()
 FPS = 24
 
-bug = Bug(0, 100, 128, 128, 'images/sword.png')
-# img_sword = pygame.image.load('sword.png')
+bug = Bug(0, SCREENHEIGHT - 128, 128, 128, 'images/sword_right.png')
 
 while True:
 
-    # <PROCESS>
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-    # </PROCESS>
+    process(bug)
 
     # <LOGIC>
     bug.motion()
