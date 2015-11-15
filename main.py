@@ -1,6 +1,8 @@
 import pygame
 import sys
 
+from classes import *
+
 
 pygame.init()
 WIDTH, HEIGHT = (640, 360)
@@ -8,7 +10,8 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
 clock = pygame.time.Clock()
 FPS = 24
 
-img_sword = pygame.image.load('sword.png')
+bug = Bug(0, 100, 128, 128, 'images/sword.png')
+# img_sword = pygame.image.load('sword.png')
 
 while True:
 
@@ -20,13 +23,12 @@ while True:
     # </PROCESS>
 
     # <LOGIC>
+    bug.motion()
     # </LOGIC>
 
     # <DRAW>
-    x = 200
-    y = 200
-
-    screen.blit(img_sword, (x, y))
+    screen.fill((0, 0, 0))
+    BaseClass.allsprites.draw(screen)
 
     pygame.display.flip()
     # </DRAW>

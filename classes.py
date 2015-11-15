@@ -19,3 +19,16 @@ class BaseClass(pygame.sprite.Sprite):
 
         self.width = width
         self.height = height
+
+
+class Bug(BaseClass):
+
+    List = pygame.sprite.Group()
+
+    def __init__(self, x, y, width, height, image_string):
+        super(Bug, self).__init__(x, y, width, height, image_string)
+        Bug.List.add(self)
+        self.velx = 3
+
+    def motion(self):
+        self.rect.x += self.velx
