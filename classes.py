@@ -31,7 +31,7 @@ class MainCharacter(BaseSprite):
         super(MainCharacter, self).__init__(x, y, width, height, image_string)
         MainCharacter.List.add(self)
         self.velx = 0
-        self.vely = 5
+        self.vely = 8
         self.jumping = False
         self.go_down = False
 
@@ -69,7 +69,7 @@ class Monster(BaseSprite):
         super(Monster, self).__init__(x, y, width, height, image_string)
         Monster.List.add(self)
         self.velx = randint(1, 4)
-        self.amplitude = randint(20, 140)
+        self.amplitude = randint(30, 180)
         self.period = randint(4, 5) / 100.0
 
     def motion(self, SCREENWIDTH):
@@ -79,7 +79,7 @@ class Monster(BaseSprite):
             self.velx = -self.velx
 
         self.rect.x += self.velx
-        self.rect.y = self.amplitude * math.sin(self.period * self.rect.x) + 140
+        self.rect.y = self.amplitude * math.sin(self.period * self.rect.x) + 180
 
     @staticmethod
     def movement(SCREENWIDTH):
