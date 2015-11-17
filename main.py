@@ -29,6 +29,7 @@ while True:
     # <DRAW>
     screen.blit(background, (0, 0))
     BaseSprite.allsprites.draw(screen)
+    Projectile.List.draw(screen)
 
     pygame.display.flip()
     # </DRAW>

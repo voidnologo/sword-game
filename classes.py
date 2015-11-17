@@ -87,13 +87,30 @@ class Monster(BaseSprite):
             monster.motion(SCREENWIDTH)
 
 
-class Projectile(BaseSprite):
+class Projectile(pygame.sprite.Sprite):
 
     List = pygame.sprite.Group()
+    projectiles = []
 
     def __init__(self, x, y, width, height, image_string):
-        super(Projectile, self).__init__(x, y, width, height, image_string)
+        super(Projectile, self).__init__()
+        self.image = pygame.image.load(image_string)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.width = width
+        self.height = height
+
+        try:
+            last_element = Projectile.projectiles[-1]
+            difference = abs(self.rect.x - last_element.rect.x)
+            if difference < self.width:
+                return
+        except Exception:
+            pass
+
         Projectile.List.add(self)
+        Projectile.projectiles.append(self)
         self.velx = None
 
     @staticmethod
