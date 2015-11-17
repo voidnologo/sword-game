@@ -26,6 +26,7 @@ class BaseSprite(pygame.sprite.Sprite):
 class MainCharacter(BaseSprite):
 
     List = pygame.sprite.Group()
+    direction = ''
 
     def __init__(self, x, y, width, height, image_string):
         super(MainCharacter, self).__init__(x, y, width, height, image_string)
@@ -73,7 +74,6 @@ class Monster(BaseSprite):
         self.period = randint(4, 5) / 100.0
 
     def motion(self, SCREENWIDTH):
-
         if self.rect.x + self.width > SCREENWIDTH or self.rect.x < 0:
             self.image = pygame.transform.flip(self.image, True, False)
             self.velx = -self.velx
@@ -85,3 +85,18 @@ class Monster(BaseSprite):
     def movement(SCREENWIDTH):
         for monster in Monster.List:
             monster.motion(SCREENWIDTH)
+
+
+class Projectile(BaseSprite):
+
+    List = pygame.sprite.Group()
+
+    def __init__(self, x, y, width, height, image_string):
+        super(Projectile, self).__init__(x, y, width, height, image_string)
+        Projectile.List.add(self)
+        self.velx = None
+
+    @staticmethod
+    def movement():
+        for projectile in Projectile.List:
+            projectile.rect.x += projectile.velx

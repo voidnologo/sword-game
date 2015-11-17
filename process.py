@@ -16,14 +16,23 @@ def process(main_character, FPS, total_frames):
     if keys[pygame.K_d]:
         main_character.image = pygame.image.load('images/sword_right.png')
         main_character.velx = 5
+        classes.MainCharacter.direction = 'right'
     elif keys[pygame.K_a]:
         main_character.image = pygame.image.load('images/sword_left.png')
         main_character.velx = -5
+        classes.MainCharacter.direction = 'left'
     else:
         main_character.velx = 0
 
     if keys[pygame.K_w]:
         main_character.jumping = True
+
+    if keys[pygame.K_SPACE]:
+        x = main_character.rect.x + 85 if classes.MainCharacter.direction == 'right' else main_character.rect.x
+        p = classes.Projectile(x, main_character.rect.y, 48, 48, 'images/projectiles/fire_48.png')
+        p.velx = 8 if classes.MainCharacter.direction == 'right' else -8
+        if p.velx < 0:
+            pygame.transform.flip(p.image, True, False)
 
     spawn(FPS, total_frames)
 
