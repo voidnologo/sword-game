@@ -1,8 +1,10 @@
 import pygame
 import sys
+import classes
+import random
 
 
-def process(main_character):
+def process(main_character, FPS, total_frames):
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -22,3 +24,12 @@ def process(main_character):
 
     if keys[pygame.K_w]:
         main_character.jumping = True
+
+    spawn(FPS, total_frames)
+
+
+def spawn(FPS, total_frames):
+    four_seconds = FPS * 4
+    if total_frames % four_seconds == 0:
+        x = 1 if random.choice([True, False]) else 710  # left = 1, right = SCREENWIDTH - image.width
+        classes.Monster(x, 130, 90, 50, 'images/monster.png')
