@@ -20,8 +20,9 @@ while True:
 
     # <LOGIC>
     main_character.motion(SCREENWIDTH, SCREENHEIGHT)
-    Monster.movement(SCREENWIDTH)
+    Monster.update_all(SCREENWIDTH)
     Projectile.movement()
+    # BaseSprite.allsprites.update()  # calls the 'update' method on each sprite
     total_frames += 1
 
     # </LOGIC>

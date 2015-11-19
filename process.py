@@ -35,6 +35,7 @@ def process(main_character, FPS, total_frames):
             pygame.transform.flip(p.image, True, False)
 
     spawn(FPS, total_frames)
+    collisions()
 
 
 def spawn(FPS, total_frames):
@@ -42,3 +43,11 @@ def spawn(FPS, total_frames):
     if total_frames % four_seconds == 0:
         x = 1 if random.choice([True, False]) else 710  # left = 1, right = SCREENWIDTH - image.width
         classes.Monster(x, 130, 90, 50, 'images/monster.png')
+
+
+def collisions():
+    for monster in classes.Monster.List:
+        monster_hit = pygame.sprite.spritecollide(monster, classes.Projectile.List, True)
+        if len(monster_hit) > 0:
+            for hit in monster_hit:
+                monster.health -= monster.half_health

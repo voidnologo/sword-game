@@ -22,6 +22,11 @@ class BaseSprite(pygame.sprite.Sprite):
         self.width = width
         self.height = height
 
+    def destroy(self, class_name):
+        class_name.List.remove(self)
+        BaseSprite.allsprites.remove(self)
+        del self
+
 
 class MainCharacter(BaseSprite):
 
@@ -65,13 +70,16 @@ class MainCharacter(BaseSprite):
 class Monster(BaseSprite):
 
     List = pygame.sprite.Group()
+    START_HEALTH = 50
+    HALF_HEALTH = START_HEALTH / 2.0
 
     def __init__(self, x, y, width, height, image_string):
         super(Monster, self).__init__(x, y, width, height, image_string)
         Monster.List.add(self)
         self.velx = randint(1, 4)
         self.amplitude = randint(30, 180)
-        self.period = randint(4, 5) / 100.0
+        self.period = randint(3, 7) / 100.0
+        self.health = self.START_HEALTH
 
     def motion(self, SCREENWIDTH):
         if self.rect.x + self.width > SCREENWIDTH or self.rect.x < 0:
@@ -81,10 +89,21 @@ class Monster(BaseSprite):
         self.rect.x += self.velx
         self.rect.y = self.amplitude * math.sin(self.period * self.rect.x) + 180
 
+    def hit(self):
+        self.health -= self.HALF_HEALTH
+
     @staticmethod
-    def movement(SCREENWIDTH):
+    def update_all(SCREENWIDTH):
         for monster in Monster.List:
+            if monster.health <= 0:
+                monster.destroy(Monster)
+
             monster.motion(SCREENWIDTH)
+
+    # @staticmethod
+    # def movement(SCREENWIDTH):
+    #     for monster in Monster.List:
+    #         monster.motion(SCREENWIDTH)
 
 
 class Projectile(pygame.sprite.Sprite):
